@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Bar chart</title>
+  <script src="https://d3js.org/d3.v4.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="../style/style.css">
+</head>
+<body>
+  <div class="container">
+    <div class="centerIt">
+      <h1>Bar chart</h1>
+      <p>This graph depicts the total revenue for countries.</p>
+      <button class="btn btn-secondary btn-lg" onclick="sortData(true)">Revenue High To Low</button>
+      <button class="btn btn-secondary btn-lg" onclick="sortData(false)">Revenue Low To High</button>
+    </div>
+  </div>
+
+  <div id="my_data"></div>
+  <script src="../scripts/bar.js"></script>
+</body>
+
+</html>
