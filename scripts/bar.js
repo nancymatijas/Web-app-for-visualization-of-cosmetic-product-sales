@@ -1,6 +1,6 @@
 const margin = { top: 30, right: 10, bottom: 130, left: 90 };
-const width = 1100 - margin.left - margin.right;
-const height = 600 - margin.top - margin.bottom;
+const width = 800 - margin.left - margin.right;
+const height = 450 - margin.top - margin.bottom;
 
 const svg = d3.select("#my_data")
   .append("svg")
@@ -9,7 +9,6 @@ const svg = d3.select("#my_data")
   .append("g")
   .attr("transform", `translate(${margin.left},${margin.top})`);
 
-// Definiranje tooltip-a
 const tooltip = d3.select("body")
   .append("div")
   .attr("class", "tooltip")
@@ -22,7 +21,6 @@ const tooltip = d3.select("body")
 function sortData(isDescending) {
   svg.selectAll("*").remove();
   d3.json("../data/data.json", function(data) {
-    // Zbrojiti podatke ako postoje više stavki za istu državu
     const countryData = {};
     data.forEach(item => {
       const country = item.Country;
@@ -34,11 +32,8 @@ function sortData(isDescending) {
       }
       countryData[country].UnitsSold += item["Units Sold"];
     });
-
-    // Pretvoriti objekt u niz
     const dataArray = Object.values(countryData);
 
-    // Sortirati podatke prema prodanim jedinicama
     dataArray.sort((a, b) => isDescending ? b.UnitsSold - a.UnitsSold : a.UnitsSold - b.UnitsSold);
 
     const topData = dataArray.slice(0, 10);
@@ -55,18 +50,16 @@ function sortData(isDescending) {
       .attr("transform", `translate(0,${height})`)
       .call(d3.axisBottom(x))
       .selectAll("text")
-      .attr("transform", "translate(-10,0)rotate(-45)")
+      .attr("transform", "translate(-5,0)rotate(-45)")
       .style("text-anchor", "end");
 
     svg.append("g").call(d3.axisLeft(y));
 
-    // X oznaka
     svg.append("text")
       .attr("transform", `translate(${width / 2}, ${height + margin.bottom / 2})`)
       .style("text-anchor", "middle")
       .text("Country");
 
-    // Y oznaka
     svg.append("text")
       .attr("transform", "rotate(-90)")
       .attr("y", 0 - margin.left)

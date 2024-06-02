@@ -1,37 +1,39 @@
 header {
-    padding: 1%;
-    text-align: center;
-    background-color: #E6006A;
-    color: white;
-    width: 100%;
-    font-family: Arial, Helvetica, sans-serif;
-  }
+  padding: 0.7%;
+  text-align: center;
+  background-color: #E6006A;
+  color: white;  
+  width: 100%;
+  font-family: Arial, Helvetica, sans-serif;
+}
 
-  .chart-selection{
-    margin-top: 1%;
-    margin-bottom: 1%;
-    display: flex; 
-    align-items: center;
-  }
-  .chart-title{
-    padding-left: 1%;
-    font-size: 22px;
-    margin-right: 1%;
+.chart-selection{
+  margin-top: 0.5%;
+  margin-bottom: 0.5%;
+  display: flex; 
+  align-items: center;
+}
 
-  }
-  .dropdown{
-    margin-top: 5px;
-  }
+.chart-title{
+  padding-left: 1%;
+  font-size: 18px;
+  margin-right: 1%;
+  margin-top: 0.5%;
+}
+
+.dropdown{
+  margin-top: 5px;
+}
 
 .dropdown-menu{
   font-size: 15px;
 }
 
-
 .btn-secondary {
   background-color: #E6006A;
   color: white; 
   border-color: #E6006A; 
+  font-size: 15px;
 }
 
 .btn-secondary:hover {
@@ -39,103 +41,110 @@ header {
   border-color: #FF5BA7; 
 }
 
+.line{
+  border-bottom:1px solid darkgray;
+  height:5px
+}
+
+#my-iframe{
+  border: none; 
+  width: 100%; 
+  height: 85vh;
+}
+
 .container{
   font-family: Arial, Helvetica, sans-serif;
 }
+
 h1 {
-  font-size: 33px; /* Prilagodite veličinu fonta po potrebi */
-  font-weight: normal; /* Postavljanje debljine fonta na normalno, ukoliko želite ukloniti bold */
+  margin-top: 0.7%;
+  font-size: 30px; 
+  font-weight: normal;
 }
+
 p{
-  font-size: 20px;
+  font-size: 15px;
   font-weight: normal;
 }
 
 
+/*GRAPHS - BAR*/
+h2{
+  font-size: 25px;
+  font-weight: normal;
+}
 
+.wrapper {
+  min-height: 100%;
+}
 
-  
-  .wrapper {
-    min-height: 100%;
-  }
+.container-fluid{
+  text-align: center;
+  align-items: center;
+}
 
-  .container-fluid{
-    text-align: center;
-    align-items: center;
-  }
+.centerIt {
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
 
-  .centerIt {
-    /*width: 900px*/
-    width: 80%;
-    margin-left: auto;
-    margin-right: auto;
-    text-align: center;
-  }
+.chart-container {
+  display: flex;
+  justify-content: space-between;
+}
 
-  .chart-container {
-    display: flex;
-    justify-content: space-between;
-  }
+#my_data {
+  display: flex;
+  flex: 0 0 70%; 
+  justify-content: center;
+}
 
+.tooltip {     
+  position: absolute; 
+  padding: 5px; 
+  border-radius: 5px; 
+  pointer-events: none; 
+}
 
-  #my_data {
-    display: flex;
-    flex: 0 0 70%; 
-    justify-content: center;
-  }
-  
-  #legend {
-    position: relative;
-    flex: 0 0 30%; /* Legenda zauzima 30% prostora */
-    padding-left: 0; /* Dodan padding kako bi legenda bila odvojena od mape */
-    margin-left: 30px;
-    box-sizing: border-box; /* Dodano kako bi padding bio uključen u širinu elementa */
-    width: 30%;
-  }
-  
-  .legend {
-    text-align: left; /* Poravnaj legendu prema lijevo */
-    font-size: 18px;
-    font-family: Arial, Helvetica, sans-serif;
-  }
-  
-
-  .tooltip { 
-    position: absolute; 
-    padding: 5px; 
-    border-radius: 5px; 
-    pointer-events: none; 
-  }
-
-
-    /*LOLLIPOP*/
-    #selectButton {
-      padding: 4px;
-      width: 30%;
-    }
-  
-  
-
-  /*BUBBLE*/
-  .bubbles { 
-    stroke-width: 2px; 
-    stroke: white; 
-  }
-  .bubbles:hover { 
-    stroke: black; 
-  }
-
+/*LOLLIPOP*/
+#selectButton {
+  padding: 5px;
+  width: 30%;
+}  
 
 /*WORLDMAP*/
-  #worldmap {
-    width: 100%;
-    height: auto;
-  }
+#worldmap {
+  width: 100%;
+  height: auto;
+}
   
-  .map-container {
-    border: 3px solid black;
-    margin-left: 19%; /* Dodajte marginu na lijevoj strani */
+.map-container {
+  border: 3px solid black;
+  margin-left: 20%;   
+}
 
-  }
+#legend {
+  position: relative;
+  flex: 0 0 30%; 
+  padding-left: 0; 
+  margin-left: 2%;
+  box-sizing: border-box;
+  width: 30%;
+  font-weight: normal;
+}
+  
+.legend {
+  margin-top: 5px;
+  text-align: left; 
+  font-size: 15px;
+}
 
- 
+.color-box {
+  background-color: var(--color);
+  width: 15px;
+  height: 15px;
+  display: inline-block;
+  margin-right: 5px;
+}

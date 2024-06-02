@@ -1,7 +1,7 @@
-const width = 850, height = 600;
+const width = 600, height = 450;
 
 const projection = d3.geoMercator()
-                     .scale(130)
+                     .scale(90)
                      .translate([width / 2, height / 1.5]);
                      
 const path = d3.geoPath()
@@ -20,14 +20,13 @@ const tooltip = d3.select("body")
                   .style("font-size", "15px")
                   .style("color", "white");
 
-const colors = ["#F48FB1", "#F06292", "#E91E63", "#C2185B"]; // Define your array of colors
-const profitRanges = [15000000, 17000000, 20000000]; // Define your profit ranges
+const colors = ["#F48FB1", "#F06292", "#E91E63", "#C2185B"]; 
+const profitRanges = [15000000, 17000000, 20000000];
 
 d3.json("https://unpkg.com/world-atlas@2.0.2/countries-110m.json")
   .then(worldData => {
     d3.json("../data/data.json")
       .then(profitData => {
-        // Map country names to total profit
         const countryProfitMap = new Map();
         profitData.forEach(item => {
             const country = item.Country;
@@ -59,7 +58,7 @@ d3.json("https://unpkg.com/world-atlas@2.0.2/countries-110m.json")
                         return colors[3];
                     }
                 } else {
-                    return "#BDBDBD"; // Gray color for countries without data
+                    return "#BDBDBD"; 
                 }
             })
             .on("mouseover", function(d) {
@@ -71,7 +70,17 @@ d3.json("https://unpkg.com/world-atlas@2.0.2/countries-110m.json")
                 tooltip.style("visibility", "hidden");
             })
             .on("click", function(d) {
-                const bounds = path.bounds(d), dx = bounds[1][0] - bounds[0][0], dy = bounds[1][1] - bounds[0][1], x = (bounds[0][0] + bounds[1][0]) / 2, y = (bounds[0][1] + bounds[1][1]) / 2, scale = Math.max(1, Math.min(8, 0.9 / Math.max(dx / width, dy / height))), translate = [width / 2 - scale * x, height / 2 - scale * y];
+                //Zoom
+                const bounds = path.bounds(d);
+                const [x0, y0] = bounds[0];
+                const [x1, y1] = bounds[1];
+                const dx = x1 - x0;
+                const dy = y1 - y0;
+                const x = (x0 + x1) / 2;
+                const y = (y0 + y1) / 2;
+                const scale = Math.max(1, Math.min(8, 0.9 / Math.max(dx / width, dy / height)));
+                const translate = [width / 2 - scale * x, height / 2 - scale * y];
+
                 svg.transition()
                    .duration(750)
                    .call(zoom.transform, d3.zoomIdentity.translate(translate[0], translate[1]).scale(scale));
@@ -97,10 +106,9 @@ d3.json("https://unpkg.com/world-atlas@2.0.2/countries-110m.json")
   });
 
 
-
   const legend = d3.select("#legend")
   .selectAll(".legend")
-  .data(profitRanges.concat([Infinity])) // Dodajemo beskonačnost kao posljednji raspon
+  .data(profitRanges.concat([Infinity]))
   .enter()
   .append("div")
   .attr("class", "legend")
@@ -108,5 +116,5 @@ d3.json("https://unpkg.com/world-atlas@2.0.2/countries-110m.json")
       const color = i < colors.length ? colors[i] : colors[colors.length - 1];
       const rangeStart = i === 0 ? 0 : profitRanges[i - 1];
       const rangeEnd = d;
-      return `<span style="background-color:${color}; width: 20px; height: 20px; display: inline-block; margin-right: 5px;"></span> $${rangeStart.toLocaleString()}${rangeEnd !== Infinity ? ' to $' + rangeEnd.toLocaleString() : ' and more'}`;
+      return `<span class="color-box" style="--color:${color};"></span>$${rangeStart.toLocaleString()}${rangeEnd !== Infinity ? ' to $' + rangeEnd.toLocaleString() : ' and more'}`;
   });
