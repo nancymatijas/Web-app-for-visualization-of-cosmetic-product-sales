@@ -83,12 +83,12 @@ function sortData(isDescending) {
           .duration(200)
           .style("opacity", .9);
         tooltip.html(`<strong>${d.Country}</strong><br/>Units Sold: ${d.UnitsSold}`)
-          .style("left", (d3.event.pageX) + "px")
-          .style("top", (d3.event.pageY - 28) + "px");
+          .style("left", (d3.event.pageX - 10) + "px")
+          .style("top", (d3.event.pageY - 45) + "px");
       })
       .on("mousemove", function() {
-        tooltip.style("left", (d3.event.pageX) + "px")
-          .style("top", (d3.event.pageY - 28) + "px");
+        tooltip.style("left", (d3.event.pageX - 10) + "px")
+          .style("top", (d3.event.pageY - 45) + "px");
       })
       .on("mouseout", function() {
         tooltip.style("visibility", "hidden");

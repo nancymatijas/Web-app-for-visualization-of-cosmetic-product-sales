@@ -11,6 +11,7 @@ const svg = d3.select("#my_data")
 
 d3.json("../data/data.json", function (error, data) {
     if (error) throw error;
+    
     var allCountries = d3.set(data.map(function (d) { return d.Country; })).values();
 
     d3.select("#selectButton")
@@ -20,12 +21,6 @@ d3.json("../data/data.json", function (error, data) {
         .append("option")
         .text(function (d) { return d; })
         .attr("value", function (d) { return d; });
-
-    var allRegions = d3.set(data.map(function (d) { return d.Region; })).values();
-
-    var regionColorScale = d3.scaleOrdinal()
-        .domain(allRegions)
-        .range(d3.schemeSet2);
 
     var parseDate = d3.timeParse("%m/%d/%Y");
 
@@ -67,7 +62,7 @@ d3.json("../data/data.json", function (error, data) {
         .attr("cx", function (d) { return x(d.OrderDate); })
         .attr("cy", function (d) { return y(d.UnitsSold); })
         .attr("r", 6) 
-        .style("fill", function (d) { return regionColorScale(d.Region); });
+        .style("fill", "#E6006A");
 
     var lines = svg.selectAll(".line")
         .data(data.filter(function (d) { return d.Country == allCountries[0]; }))
@@ -91,9 +86,9 @@ d3.json("../data/data.json", function (error, data) {
         tooltip.transition().duration(200);
         tooltip
             .style("opacity", 1)
-            .html("Units Sold: " + d.UnitsSold)
+            .html("Order Date: " + d3.timeFormat("%d/%m/%Y")(d.OrderDate) + "<br>Units Sold: " + d.UnitsSold)
             .style("left", (d3.event.pageX) + "px")
-            .style("top", (d3.event.pageY - 28) + "px")
+            .style("top", (d3.event.pageY - 50) + "px")
             .style("background-color", "#FF5BA7")
             .style("font-size", "15px")
             .style("color", "white");
@@ -120,7 +115,7 @@ d3.json("../data/data.json", function (error, data) {
             .attr("r", 0) 
             .attr("cx", function (d) { return x(d.OrderDate); })
             .attr("cy", function (d) { return y(d.UnitsSold); })
-            .style("fill", function (d) { return regionColorScale(d.Region); })
+            .style("fill", "#E6006A")
             .style("opacity", 0) 
             .transition()
             .duration(1000)
