@@ -1,5 +1,5 @@
-## Naziv zadatka: Vizualizacija prodaje kozmetičkih proizvoda po regijama i državama
-# Upute za postavljanje:
+# Naziv zadatka: Vizualizacija prodaje kozmetičkih proizvoda po regijama i državama
+## Upute za postavljanje:
 1.	Klonirati direktorij.
 2.	Koristeći Visual Studio Code otvoriti klonirani direktorij.
 3.	Otvoriti indeks.html kod.
