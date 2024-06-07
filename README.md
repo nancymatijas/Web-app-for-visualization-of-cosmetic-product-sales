@@ -3,4 +3,4 @@
 1.	Klonirati direktorij.
 2.	Koristeći Visual Studio Code otvoriti klonirani direktorij.
 3.	Otvoriti indeks.html kod.
-4.	Kliknite na opciju „Go Live“ u donjem statusnom baru.
+4.	Kliknuti na opciju „Go Live“ u donjem statusnom baru.
