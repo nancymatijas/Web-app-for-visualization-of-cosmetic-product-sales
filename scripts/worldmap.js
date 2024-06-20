@@ -63,9 +63,12 @@ d3.json("https://unpkg.com/world-atlas@2.0.2/countries-110m.json")
             })
             .on("mouseover", function(d) {
                 const totalProfit = countryProfitMap.get(d.properties.name) || null;
-                tooltip.html(`${d.properties.name}<br>Total Profit: ${totalProfit !== null ? totalProfit.toFixed(2) + "$" : "N/A"}`).style("visibility", "visible");
+                tooltip.html(`${d.properties.name}<br>Total Profit: ${totalProfit !== null ? totalProfit
+                       .toFixed(2) + "$" : "N/A"}`)
+                       .style("visibility", "visible");
             })
-            .on("mousemove", d => tooltip.style("top", (d3.event.pageY - 10) + "px").style("left", (d3.event.pageX + 10) + "px"))
+            .on("mousemove", d => tooltip.style("top", (d3.event.pageY - 10) + "px")
+                                         .style("left", (d3.event.pageX + 10) + "px"))
             .on("mouseout", function(d) {
                 tooltip.style("visibility", "hidden");
             })
@@ -100,20 +103,20 @@ d3.json("https://unpkg.com/world-atlas@2.0.2/countries-110m.json")
         const zoom = d3.zoom()
                       .scaleExtent([1, 8])
                       .on("zoom", () => svg.selectAll("path")
-                                          .attr("transform", d3.event.transform));
+                                           .attr("transform", d3.event.transform));
         svg.call(zoom);
       });
   });
 
   const legend = d3.select("#legend")
-  .selectAll(".legend")
-  .data(profitRanges.concat([Infinity]))
-  .enter()
-  .append("div")
-  .attr("class", "legend")
-  .html(function (d, i) {
-      const color = i < colors.length ? colors[i] : colors[colors.length - 1];
-      const rangeStart = i === 0 ? 0 : profitRanges[i - 1];
-      const rangeEnd = d;
-      return `<span class="color-box" style="--color:${color};"></span>$${rangeStart.toLocaleString()}${rangeEnd !== Infinity ? ' to $' + rangeEnd.toLocaleString() : ' and more'}`;
+                   .selectAll(".legend")
+                   .data(profitRanges.concat([Infinity]))
+                   .enter()
+                   .append("div")
+                   .attr("class", "legend")
+                   .html(function (d, i) {
+                        const color = i < colors.length ? colors[i] : colors[colors.length - 1];
+                        const rangeStart = i === 0 ? 0 : profitRanges[i - 1];
+                        const rangeEnd = d;
+                        return `<span class="color-box" style="--color:${color};"></span>$${rangeStart.toLocaleString()}${rangeEnd !== Infinity ? ' to $' + rangeEnd.toLocaleString() : ' and more'}`;
   });

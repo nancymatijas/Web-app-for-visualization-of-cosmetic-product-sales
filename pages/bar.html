@@ -13,14 +13,18 @@
   <div class="container">
     <div class="centerIt">
       <h2>Bar chart</h2>
-      <p>This graph depicts the total of sold unites for countries.</p>
-      <button class="btn btn-secondary btn-lg" onclick="sortData(true)">Sold Unites High To Low</button>
-      <button class="btn btn-secondary btn-lg" onclick="sortData(false)">Sold Unites Low To High</button>
+      <p>This graph depicts the total of sold units for countries.</p>
+      <button class="btn btn-secondary btn-lg" onclick="sortData(true)">Sold Units High To Low</button>
+      <button class="btn btn-secondary btn-lg" onclick="sortData(false)">Sold Units Low To High</button>
     </div>
   </div>
 
   <div id="my_data"></div>
   <script src="../scripts/bar.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      sortData(true);
+    });
+  </script>
 </body>
-
 </html>

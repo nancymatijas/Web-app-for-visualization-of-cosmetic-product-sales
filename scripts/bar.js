@@ -3,23 +3,24 @@ const width = 800 - margin.left - margin.right;
 const height = 450 - margin.top - margin.bottom;
 
 const svg = d3.select("#my_data")
-  .append("svg")
-  .attr("width", width + margin.left + margin.right)
-  .attr("height", height + margin.top + margin.bottom)
-  .append("g")
-  .attr("transform", `translate(${margin.left},${margin.top})`);
+              .append("svg")
+              .attr("width", width + margin.left + margin.right)
+              .attr("height", height + margin.top + margin.bottom)
+              .append("g")
+              .attr("transform", `translate(${margin.left},${margin.top})`);
 
 const tooltip = d3.select("body")
-  .append("div")
-  .attr("class", "tooltip")
-  .style("opacity", 0)
-  .style("visibility", "hidden")
-  .style("background-color", "#FF5BA7")
-  .style("font-size", "15px")
-  .style("color", "white");
+                  .append("div")
+                  .attr("class", "tooltip")
+                  .style("opacity", 0)
+                  .style("visibility", "hidden")
+                  .style("background-color", "#FF5BA7")
+                  .style("font-size", "15px")
+                  .style("color", "white");
 
 function sortData(isDescending) {
   svg.selectAll("*").remove();
+
   d3.json("../data/data.json", function(data) {
     const countryData = {};
     data.forEach(item => {
@@ -32,6 +33,7 @@ function sortData(isDescending) {
       }
       countryData[country].UnitsSold += item["Units Sold"];
     });
+    
     const dataArray = Object.values(countryData);
 
     dataArray.sort((a, b) => isDescending ? b.UnitsSold - a.UnitsSold : a.UnitsSold - b.UnitsSold);
@@ -39,62 +41,61 @@ function sortData(isDescending) {
     const topData = dataArray.slice(0, 10);
 
     const x = d3.scaleBand()
-      .range([0, width])
-      .domain(topData.map(d => d.Country))
-      .padding(0.2);
+                .range([0, width])
+                .domain(topData.map(d => d.Country))
+                .padding(0.2);
     const y = d3.scaleLinear()
-      .domain([0, d3.max(topData, d => parseFloat(d.UnitsSold))])
-      .range([height, 0]);
+                .domain([0, d3.max(topData, d => parseFloat(d.UnitsSold))])
+                .range([height, 0]);
 
     svg.append("g")
-      .attr("transform", `translate(0,${height})`)
-      .call(d3.axisBottom(x))
-      .selectAll("text")
-      .attr("transform", "translate(-5,0)rotate(-45)")
-      .style("text-anchor", "end");
-
-    svg.append("g").call(d3.axisLeft(y));
-
+       .attr("transform", `translate(0,${height})`)
+       .call(d3.axisBottom(x))
+       .selectAll("text")
+       .attr("transform", "translate(-5,0)rotate(-45)")
+       .style("text-anchor", "end");
     svg.append("text")
-      .attr("transform", `translate(${width / 2}, ${height + margin.bottom / 2})`)
-      .style("text-anchor", "middle")
-      .text("Country");
+       .attr("transform", `translate(${width / 2}, ${height + margin.bottom / 2})`)
+       .style("text-anchor", "middle")
+       .text("Country");
 
+    svg.append("g")
+       .call(d3.axisLeft(y));
     svg.append("text")
-      .attr("transform", "rotate(-90)")
-      .attr("y", 0 - margin.left)
-      .attr("x", 0 - height / 2)
-      .attr("dy", "1em")
-      .style("text-anchor", "middle")
-      .text("Units Sold");
+       .attr("transform", "rotate(-90)")
+       .attr("y", 0 - margin.left)
+       .attr("x", 0 - height / 2)
+       .attr("dy", "1em")
+       .style("text-anchor", "middle")
+       .text("Units Sold");
 
     svg.selectAll(".bar")
-      .data(topData)
-      .enter().append("rect")
-      .attr("class", "bar")
-      .attr("x", d => x(d.Country))
-      .attr("width", x.bandwidth())
-      .attr("y", d => y(parseFloat(d.UnitsSold)))
-      .attr("height", d => height - y(parseFloat(d.UnitsSold)))
-      .attr("fill", "#AFAFB1")
-      .on("mouseover", function(d) {
-        tooltip.style("visibility", "visible");
-        tooltip.transition()
-          .duration(200)
-          .style("opacity", .9);
-        tooltip.html(`<strong>${d.Country}</strong><br/>Units Sold: ${d.UnitsSold}`)
-          .style("left", (d3.event.pageX - 10) + "px")
-          .style("top", (d3.event.pageY - 45) + "px");
-      })
-      .on("mousemove", function() {
-        tooltip.style("left", (d3.event.pageX - 10) + "px")
-          .style("top", (d3.event.pageY - 45) + "px");
-      })
-      .on("mouseout", function() {
-        tooltip.style("visibility", "hidden");
-        tooltip.transition()
-          .duration(500)
-          .style("opacity", 0);
-      });
+       .data(topData)
+       .enter().append("rect")
+       .attr("class", "bar")
+       .attr("x", d => x(d.Country))
+       .attr("width", x.bandwidth())
+       .attr("y", d => y(parseFloat(d.UnitsSold)))
+       .attr("height", d => height - y(parseFloat(d.UnitsSold)))
+       .attr("fill", "#AFAFB1")
+       .on("mouseover", function(d) {
+          tooltip.style("visibility", "visible");
+          tooltip.transition()
+                 .duration(200)
+                 .style("opacity", .9);
+          tooltip.html(`<strong>${d.Country}</strong><br/>Units Sold: ${d.UnitsSold}`)
+                 .style("left", (d3.event.pageX - 10) + "px") 
+                 .style("top", (d3.event.pageY - 45) + "px");  
+        })
+       .on("mousemove", function() {
+          tooltip.style("left", (d3.event.pageX - 10) + "px")
+                 .style("top", (d3.event.pageY - 45) + "px");
+        })
+       .on("mouseout", function() {
+          tooltip.style("visibility", "hidden");
+          tooltip.transition()
+                 .duration(500)
+                 .style("opacity", 0);
+        });
   });
 }
