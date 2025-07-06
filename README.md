@@ -19,7 +19,7 @@ To run the project locally, follow these steps:
 * Click on the "Go Live" button in the bottom status bar of Visual Studio Code to launch a local development server.
 * The visualization will be accessible in your default web browser.
 
-### Note: The "Go Live" option is provided by the Live Server extension for Visual Studio Code. If you do not have it installed, you can add it from the Extensions marketplace.
+#### _Note: The "Go Live" option is provided by the Live Server extension for Visual Studio Code. If you do not have it installed, you can add it from the Extensions marketplace._
 
 ## Technologies Used
 * D3.js for interactive data visualization
